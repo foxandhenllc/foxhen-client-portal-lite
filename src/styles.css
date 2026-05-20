@@ -26,6 +26,11 @@ textarea {
   font: inherit;
 }
 
+input,
+textarea {
+  color: var(--ink);
+}
+
 button,
 a {
   -webkit-tap-highlight-color: transparent;
@@ -232,6 +237,7 @@ h3 {
 .summary-panel,
 .inspector,
 .decision-card,
+.workspace-tools,
 .placeholder-section,
 .report-panel {
   border: 1px solid rgba(7, 18, 31, 0.12);
@@ -324,9 +330,95 @@ h3 {
 
 .workspace-section,
 .decision-section,
+.workspace-tools,
 .report-panel,
 .placeholder-section {
   margin: 0 0 4rem;
+}
+
+.workspace-tools {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.62fr) minmax(320px, 0.48fr);
+  gap: 1rem;
+  padding: clamp(1.2rem, 3vw, 2rem);
+}
+
+.tools-copy p,
+.quick-add-form label span {
+  color: #526078;
+  line-height: 1.55;
+}
+
+.workspace-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.import-action {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.import-action input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.workspace-status {
+  margin: 1rem 0 0;
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.quick-add-form {
+  display: grid;
+  gap: 0.8rem;
+  border-radius: 1.6rem;
+  padding: 1rem;
+  background: color-mix(in srgb, var(--soft) 72%, white);
+}
+
+.quick-add-form h3 {
+  margin-bottom: 0.2rem;
+}
+
+.quick-add-form label,
+.quick-add-form label span {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.quick-add-form label span {
+  font-size: 0.75rem;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.quick-add-form input,
+.quick-add-form textarea {
+  width: 100%;
+  border: 1px solid rgba(7, 18, 31, 0.12);
+  border-radius: 1rem;
+  padding: 0.8rem 0.9rem;
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.quick-add-form textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+
+.form-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
 }
 
 .section-heading {
@@ -687,6 +779,7 @@ dd {
   .site-header,
   .hero,
   .workspace-grid,
+  .workspace-tools,
   .placeholder-section,
   .report-panel {
     grid-template-columns: 1fr;
@@ -732,6 +825,7 @@ dd {
   .milestone-list,
   .decision-grid,
   .placeholder-summary,
+  .form-pair,
   .detail-grid {
     grid-template-columns: 1fr;
   }

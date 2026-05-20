@@ -1,15 +1,15 @@
-import { useMemo, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { MetricCards } from "./components/MetricCards";
 import { MilestoneBoard } from "./components/MilestoneBoard";
 import { PublicSafeToggle } from "./components/PublicSafeToggle";
 import { ReportPanel } from "./components/ReportPanel";
 import { StatusBadge } from "./components/StatusBadge";
 import { WorkspaceInspector } from "./components/WorkspaceInspector";
+import { WorkspaceTools } from "./components/WorkspaceTools";
 import {
   approvalOrder,
   decisionLabels,
   placeholderLabels,
-  sampleWorkspace,
   type ClientWorkspace,
   type MilestoneTemplate,
   type PlaceholderStatus,
@@ -17,6 +17,16 @@ import {
 } from "./data/clientWorkspace";
 import { buildClientWorkspaceReport, serializeClientWorkspaceStatus } from "./exporters/statusReport";
 import { getWorkspaceSummary } from "./lib/portalMetrics";
+import {
+  addCustomMilestone,
+  cloneSampleWorkspace,
+  loadWorkspaceFromStorage,
+  parseWorkspaceJson,
+  saveWorkspaceToStorage,
+  serializeWorkspace,
+  type CustomMilestoneInput,
+  type StorageLike
+} from "./lib/workspaceStorage";
 import "./styles.css";
 
 function cyclePlaceholder(status: PlaceholderStatus): PlaceholderStatus {
@@ -47,11 +57,27 @@ function downloadFile(filename: string, contents: string, type: string) {
   URL.revokeObjectURL(url);
 }
 
+function getBrowserStorage(): StorageLike | null {
+  if (typeof window === "undefined") return null;
+
+  try {
+    return window.localStorage ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function getInitialWorkspace() {
+  return loadWorkspaceFromStorage(getBrowserStorage()) ?? cloneSampleWorkspace();
+}
+
 function App() {
-  const [workspace, setWorkspace] = useState<ClientWorkspace>(sampleWorkspace);
+  const [workspace, setWorkspace] = useState<ClientWorkspace>(getInitialWorkspace);
   const [publicSafeMode, setPublicSafeMode] = useState(true);
-  const [selectedId, setSelectedId] = useState(sampleWorkspace.milestones[0]?.id ?? "");
-  const [report, setReport] = useState(() => buildClientWorkspaceReport(sampleWorkspace, { publicSafeMode: true }));
+  const [selectedId, setSelectedId] = useState(workspace.milestones[0]?.id ?? "");
+  const [report, setReport] = useState(() => buildClientWorkspaceReport(workspace, { publicSafeMode: true }));
+  const [workspaceNotice, setWorkspaceNotice] = useState("Saved automatically in this browser only.");
+  const [selectLatestMilestone, setSelectLatestMilestone] = useState(false);
 
   const summary = useMemo(() => getWorkspaceSummary(workspace), [workspace]);
   const selectedMilestone = workspace.milestones.find((milestone) => milestone.id === selectedId) ?? workspace.milestones[0];
@@ -62,6 +88,24 @@ function App() {
     "--soft": workspace.theme.soft,
     "--warm": workspace.theme.warm
   } as CSSProperties;
+
+  useEffect(() => {
+    saveWorkspaceToStorage(workspace, getBrowserStorage());
+  }, [workspace]);
+
+  useEffect(() => {
+    if (!workspace.milestones.some((milestone) => milestone.id === selectedId)) {
+      setSelectedId(workspace.milestones[0]?.id ?? "");
+    }
+  }, [selectedId, workspace.milestones]);
+
+  useEffect(() => {
+    if (!selectLatestMilestone) return;
+
+    const addedMilestone = workspace.milestones[workspace.milestones.length - 1];
+    setSelectedId(addedMilestone?.id ?? workspace.milestones[0]?.id ?? "");
+    setSelectLatestMilestone(false);
+  }, [selectLatestMilestone, workspace.milestones]);
 
   function refreshReport() {
     const nextReport = buildClientWorkspaceReport(workspace, { publicSafeMode });
@@ -132,6 +176,40 @@ function App() {
     downloadFile(`${nextReport.filenameBase}.md`, nextReport.markdown, "text/markdown");
   }
 
+  function downloadWorkspaceJson() {
+    downloadFile(`${workspace.repoName}-workspace.json`, serializeWorkspace(workspace), "application/json");
+    setWorkspaceNotice("Workspace JSON downloaded. No data was sent anywhere.");
+  }
+
+  function importWorkspaceJson(contents: string) {
+    const parsedWorkspace = parseWorkspaceJson(contents);
+
+    if (!parsedWorkspace.ok) {
+      setWorkspaceNotice(parsedWorkspace.error);
+      return;
+    }
+
+    setWorkspace(parsedWorkspace.workspace);
+    setSelectedId(parsedWorkspace.workspace.milestones[0]?.id ?? "");
+    setReport(buildClientWorkspaceReport(parsedWorkspace.workspace, { publicSafeMode }));
+    setWorkspaceNotice("Workspace JSON imported and saved locally in this browser.");
+  }
+
+  function resetWorkspace() {
+    const nextWorkspace = cloneSampleWorkspace();
+    setWorkspace(nextWorkspace);
+    setSelectedId(nextWorkspace.milestones[0]?.id ?? "");
+    setReport(buildClientWorkspaceReport(nextWorkspace, { publicSafeMode }));
+    setWorkspaceNotice("Reset to the public-safe sample workspace.");
+  }
+
+  function addMilestone(input: CustomMilestoneInput) {
+    const now = input.now ?? new Date();
+    setWorkspace((current) => addCustomMilestone(current, { ...input, now }));
+    setSelectLatestMilestone(true);
+    setWorkspaceNotice("Custom milestone added and saved locally.");
+  }
+
   return (
     <div className={publicSafeMode ? "app-shell public-safe" : "app-shell private-preview"} style={appStyle}>
       <header className="site-header">
@@ -146,6 +224,7 @@ function App() {
           <a href="#milestones">Milestones</a>
           <a href="#decisions">Decisions</a>
           <a href="#exports">Exports</a>
+          <a href="#workspace-tools">Workspace</a>
           <a className="nav-button" href={workspace.repositoryUrl}>Fork starter</a>
         </nav>
         <PublicSafeToggle enabled={publicSafeMode} onChange={setPublicSafeMode} />
@@ -179,6 +258,14 @@ function App() {
         <section className="summary-panel" aria-label="Workspace status metrics">
           <MetricCards summary={summary} />
         </section>
+
+        <WorkspaceTools
+          statusMessage={workspaceNotice}
+          onExportWorkspace={downloadWorkspaceJson}
+          onImportWorkspace={importWorkspaceJson}
+          onResetWorkspace={resetWorkspace}
+          onAddMilestone={addMilestone}
+        />
 
         <section className="workspace-section" id="milestones">
           <div className="section-heading">

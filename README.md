@@ -24,8 +24,11 @@ Client Portal Lite turns a generic project board into a client-facing workspace 
 - Client question queue with open, answered, and deferred states.
 - Closeout checklist for final handoff and follow-up prompts.
 - Public-safe mode toggle that labels exports as fixture-only or private-fork previews.
+- Local browser persistence for workspace edits without a backend.
+- Reset-to-sample plus workspace JSON import/export for portable local workspaces.
+- Quick-add custom milestone form for lightweight client-specific planning.
 - JSON and Markdown report exports generated from the current workspace state.
-- Fixture-based smoke test for report/export generation.
+- Fixture-based smoke tests for report/export generation and local workspace helpers.
 
 ## Screenshots
 
@@ -50,6 +53,10 @@ A copy-ready CI workflow lives at `docs/github-actions/build.yml.example`; move 
 3. Adjust the theme tokens in the same fixture file.
 4. Use `docs/client-brief-template.md` to plan client-specific content before editing code.
 5. Keep backend/auth/integration work out of the public starter unless it belongs in a private fork.
+
+## Local-Only Workspace Data
+
+Edits made in the app are saved to `localStorage` in the current browser. Workspace JSON import/export uses local files only; no data is uploaded, synced, or sent to a backend.
 
 ## Documentation
 
