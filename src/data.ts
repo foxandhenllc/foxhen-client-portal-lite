@@ -1,128 +1,169 @@
-export const sample = {
+export type ItemStatus = "backlog" | "active" | "blocked" | "ready" | "done";
+
+export type WorkItem = {
+  id: string;
+  title: string;
+  category: string;
+  owner: string;
+  status: ItemStatus;
+  priority: number;
+  effort: number;
+  friction: number;
+  value: number;
+  due: string;
+  notes: string;
+};
+
+export type QualityCheck = {
+  id: string;
+  label: string;
+  passed: boolean;
+  weight: number;
+};
+
+export const sample: {
+  repoName: string;
+  title: string;
+  subtitle: string;
+  serviceLine: string;
+  description: string;
+  repositoryUrl: string;
+  liveDemoUrl: string;
+  theme: { accent: string; accent2: string; ink: string; soft: string; warm: string };
+  items: WorkItem[];
+  checks: QualityCheck[];
+  deliverables: string[];
+} = {
   "repoName": "foxhen-client-portal-lite",
   "title": "Client Portal Lite",
-  "subtitle": "A polished service portal sample",
+  "subtitle": "client workspace",
   "serviceLine": "Client operations portal",
-  "heroTitle": "A clean command center for small-service engagements.",
-  "heroCopy": "A fictional client workspace with intake status, milestones, approvals, files, and payment-readiness signals in one public-safe demo.",
-  "primaryAction": "Review portal flow",
-  "secondaryAction": "Package handoff",
+  "description": "Operational command center for intake, milestones, approvals, files, and closeout.",
   "repositoryUrl": "https://github.com/foxandhenllc/foxhen-client-portal-lite",
   "liveDemoUrl": "https://foxhen-client-portal-lite.vercel.app",
   "theme": {
-    "accent": "#244b5a",
-    "accent2": "#d99058",
-    "ink": "#07121f",
-    "soft": "#eaf4ef",
-    "warm": "#f8efe4",
-    "surface": "#fffaf4",
-    "muted": "#5c667a",
-    "border": "rgba(7, 18, 31, 0.12)"
+    "accent": "#253f6e",
+    "accent2": "#f4b860",
+    "ink": "#070d19",
+    "soft": "#edf4ff",
+    "warm": "#fff4df"
   },
-  "metrics": [
+  "items": [
     {
-      "label": "Open approvals",
-      "value": "3",
-      "note": "2 need owner input"
-    },
-    {
-      "label": "Milestone clarity",
-      "value": "94%",
-      "note": "+28 pts"
-    },
-    {
-      "label": "Handoff assets",
-      "value": "12",
-      "note": "ready to package"
-    }
-  ],
-  "stages": [
-    {
-      "label": "Intake",
-      "detail": "Scope answers are normalized into a job card with budget, dates, stakeholders, and open questions.",
-      "status": "ready",
-      "owner": "F&H",
-      "index": 1
-    },
-    {
-      "label": "Milestones",
-      "detail": "The engagement is split into visible checkpoints with owner, proof, and acceptance state.",
+      "id": "cli-1",
+      "title": "Kickoff packet",
+      "category": "Intake",
+      "owner": "Chris",
       "status": "active",
-      "owner": "Studio",
-      "index": 2
+      "priority": 5,
+      "effort": 2,
+      "friction": 1,
+      "value": 5,
+      "due": "Today",
+      "notes": "Sample client workspace work item for client operations portal."
     },
     {
-      "label": "Approvals",
-      "detail": "Pending decisions are separated from delivery work so the client knows exactly what to review.",
-      "status": "waiting",
-      "owner": "Client",
-      "index": 3
+      "id": "cli-2",
+      "title": "Design approval",
+      "category": "Build",
+      "owner": "Fox & Hen",
+      "status": "backlog",
+      "priority": 4,
+      "effort": 4,
+      "friction": 2,
+      "value": 4,
+      "due": "24h",
+      "notes": "Sample client workspace work item for client operations portal."
     },
     {
-      "label": "Payment",
-      "detail": "Mock invoice readiness, receipt status, and delivery notes are reconciled before closeout.",
-      "status": "queued",
-      "owner": "Ops",
-      "index": 4
+      "id": "cli-3",
+      "title": "Asset handoff",
+      "category": "Review",
+      "owner": "Buyer",
+      "status": "blocked",
+      "priority": 3,
+      "effort": 3,
+      "friction": 4,
+      "value": 4,
+      "due": "48h",
+      "notes": "Sample client workspace work item for client operations portal."
+    },
+    {
+      "id": "cli-4",
+      "title": "Invoice memo",
+      "category": "Export",
+      "owner": "Automation",
+      "status": "ready",
+      "priority": 4,
+      "effort": 2,
+      "friction": 2,
+      "value": 3,
+      "due": "This week",
+      "notes": "Sample client workspace work item for client operations portal."
+    },
+    {
+      "id": "cli-5",
+      "title": "Launch note",
+      "category": "Intake",
+      "owner": "QA",
+      "status": "backlog",
+      "priority": 2,
+      "effort": 1,
+      "friction": 1,
+      "value": 3,
+      "due": "Waiting",
+      "notes": "Sample client workspace work item for client operations portal."
+    },
+    {
+      "id": "cli-6",
+      "title": "Follow-up offer",
+      "category": "Build",
+      "owner": "Chris",
+      "status": "done",
+      "priority": 5,
+      "effort": 5,
+      "friction": 3,
+      "value": 5,
+      "due": "Next pass",
+      "notes": "Sample client workspace work item for client operations portal."
     }
   ],
-  "workItems": [
+  "checks": [
     {
-      "title": "Welcome packet",
-      "detail": "Add scope summary and kickoff checklist",
-      "status": "ready"
+      "id": "payer",
+      "label": "Payer or owner is clear",
+      "passed": true,
+      "weight": 18
     },
     {
-      "title": "Homepage polish",
-      "detail": "Mark first milestone as reviewable",
-      "status": "active"
+      "id": "deliverable",
+      "label": "Deliverable has acceptance criteria",
+      "passed": true,
+      "weight": 18
     },
     {
-      "title": "Asset folder",
-      "detail": "Replace loose links with grouped deliverables",
-      "status": "waiting"
+      "id": "friction",
+      "label": "Account/access friction is documented",
+      "passed": false,
+      "weight": 14
     },
     {
-      "title": "Invoice memo",
-      "detail": "Preview closeout and next-step copy",
-      "status": "queued"
+      "id": "handoff",
+      "label": "Handoff package is generated",
+      "passed": false,
+      "weight": 16
+    },
+    {
+      "id": "reuse",
+      "label": "Repeatable pipeline note exists",
+      "passed": true,
+      "weight": 12
     }
   ],
   "deliverables": [
-    {
-      "title": "Portal map",
-      "detail": "Clear page structure, navigation states, and stakeholder view rules."
-    },
-    {
-      "title": "Approval tracker",
-      "detail": "A compact queue for decisions that otherwise disappear in email threads."
-    },
-    {
-      "title": "Closeout pack",
-      "detail": "Receipt notes, files, and next recommended engagement packaged for handoff."
-    }
-  ],
-  "timeline": [
-    {
-      "time": "0-4 hrs",
-      "detail": "Normalize intake and define portal architecture"
-    },
-    {
-      "time": "4-16 hrs",
-      "detail": "Build dashboard states and approval queue"
-    },
-    {
-      "time": "16-24 hrs",
-      "detail": "QA mobile flow and package handoff"
-    }
-  ],
-  "proof": [
-    "Maps directly to a paid portal/dashboard cleanup offer.",
-    "Shows product management judgment from kickoff to closeout.",
-    "Uses fictional data only and avoids any real customer artifacts."
+    "Ranked board",
+    "Editable item inspector",
+    "Readiness checklist",
+    "Exportable handoff report"
   ]
-} as const;
-
-export type StageStatus = "ready" | "active" | "waiting" | "queued";
-export type DemoStage = (typeof sample.stages)[number];
-export type WorkItem = (typeof sample.workItems)[number];
+};
