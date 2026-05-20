@@ -129,41 +129,41 @@ export const sample: {
     }
   ],
   "checks": [
-    {
-      "id": "payer",
-      "label": "Payer or owner is clear",
-      "passed": true,
-      "weight": 18
-    },
-    {
-      "id": "deliverable",
-      "label": "Deliverable has acceptance criteria",
-      "passed": true,
-      "weight": 18
-    },
-    {
-      "id": "friction",
-      "label": "Account/access friction is documented",
-      "passed": false,
-      "weight": 14
-    },
-    {
-      "id": "handoff",
-      "label": "Handoff package is generated",
-      "passed": false,
-      "weight": 16
-    },
-    {
-      "id": "reuse",
-      "label": "Repeatable pipeline note exists",
-      "passed": true,
-      "weight": 12
-    }
+      {
+          "id": "owner",
+          "label": "Client owner and approver are clear",
+          "passed": true,
+          "weight": 18
+      },
+      {
+          "id": "criteria",
+          "label": "Milestone acceptance criteria are written",
+          "passed": true,
+          "weight": 18
+      },
+      {
+          "id": "assets",
+          "label": "Missing assets/access are documented",
+          "passed": false,
+          "weight": 14
+      },
+      {
+          "id": "handoff",
+          "label": "Client update package is generated",
+          "passed": false,
+          "weight": 16
+      },
+      {
+          "id": "reuse",
+          "label": "Reusable portal setup note exists",
+          "passed": true,
+          "weight": 12
+      }
   ],
   "deliverables": [
-    "Ranked board",
-    "Editable item inspector",
-    "Readiness checklist",
-    "Exportable handoff report"
+      "Client milestone board",
+      "Approval and asset queue",
+      "Readiness checklist",
+      "Exportable client update"
   ]
 };
