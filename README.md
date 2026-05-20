@@ -1,45 +1,77 @@
 # Client Portal Lite
 
-Public Fox & Hen working sample for a **client operations portal**.
+A reusable, public-safe React + TypeScript + Vite starter for lightweight client workspaces.
 
-![Demo screenshot](docs/demo-screenshot.png)
+![Client Portal Lite screenshot](docs/demo-screenshot.png)
 
-## Live Demo
+## What It Is
 
-- Demo: [https://foxhen-client-portal-lite.vercel.app](https://foxhen-client-portal-lite.vercel.app)
-- Repository: [https://github.com/foxandhenllc/foxhen-client-portal-lite](https://github.com/foxandhenllc/foxhen-client-portal-lite)
+Client Portal Lite turns a generic project board into a client-facing workspace pattern: milestone templates, approval states, decision logs, file/request placeholders, client questions, closeout tasks, and exportable status reports. It is intentionally static and fixture-driven so the public repo stays safe to fork.
 
-## What This Demo Is
+## Use Cases
 
-Client Portal Lite is a forkable React/Vite operating tool for teams that want to turn scattered approvals, files, milestone notes, and closeout tasks into a public-safe client command center. It is intentionally small, static, and public-safe so you can copy the pattern without inheriting a backend or vendor lock-in.
+- Package a service engagement into visible milestones and approval checkpoints.
+- Track client questions, missing files, access requests, and scope decisions.
+- Generate Markdown and JSON status reports before client updates.
+- Create a private fork for a real client without starting from an empty app.
+- Show a public portfolio demo without exposing customer data.
 
-## Fully Working Behaviors
+## Included Starter Features
 
-- Search, filter, and sort a domain-specific workflow board.
-- Add a fictional item and edit owner, notes, priority, value, effort, and friction.
-- Advance status and watch readiness metrics update in real time.
-- Run a 24-hour sprint simulation to reduce friction on the highest-scoring work.
-- Toggle QA gates, generate a handoff report, and download the board as JSON.
+- Domain-specific milestone templates with progress and approval states.
+- Decision log for scope calls, architecture choices, and next steps.
+- File and request placeholders that show what is needed without storing private assets.
+- Client question queue with open, answered, and deferred states.
+- Closeout checklist for final handoff and follow-up prompts.
+- Public-safe mode toggle that labels exports as fixture-only or private-fork previews.
+- JSON and Markdown report exports generated from the current workspace state.
+- Fixture-based smoke test for report/export generation.
 
-## Workflow Template
+## Screenshots
 
-See [docs/workflow-template.md](docs/workflow-template.md) for the sample client workspace launch loop, adaptation checklist, and public-safe data rules.
+The README screenshot lives at `docs/demo-screenshot.png`. Refresh it whenever the rendered UI changes.
 
-## Suggested Forks
-
-- Replace sample items with your real client milestones.
-- Rename owners to match your delivery roles.
-- Use checks as acceptance criteria before a milestone ships.
-- Export the handoff JSON before each client update.
-
-## Local Run
+## Local Usage
 
 ```bash
 npm install
 npm run dev
+npm run test:smoke
+npm run typecheck
 npm run build
+```
+
+A copy-ready CI workflow lives at `docs/github-actions/build.yml.example`; move it to `.github/workflows/build.yml` after GitHub auth has the `workflow` scope.
+
+## Client Customization
+
+1. Copy this repo into a private fork for real client work.
+2. Edit `src/data/clientWorkspace.ts` to replace fictional milestones, owners, files, requests, questions, decisions, and closeout tasks.
+3. Adjust the theme tokens in the same fixture file.
+4. Use `docs/client-brief-template.md` to plan client-specific content before editing code.
+5. Keep backend/auth/integration work out of the public starter unless it belongs in a private fork.
+
+## Documentation
+
+- `docs/public-safe-data.md` — data rules for keeping the public repo fictional.
+- `docs/customization-guide.md` — how to adapt the starter for a private workspace.
+- `docs/client-brief-template.md` — fill-in brief for real client setup planning.
+- `docs/workflow-template.md` — original workflow adaptation checklist.
+
+## Project Structure
+
+```text
+src/components   Reusable React UI sections
+src/data         Fictional workspace fixture and domain types
+src/lib          Workspace metrics and state helpers
+src/exporters    JSON and Markdown report generation
+tests/fixtures   Smoke-test workspace fixture
 ```
 
 ## Public-Safe Scope
 
-This is a static React/Vite demo with fictional sample data. It includes no production data, credentials, real contacts, copied customer work, backend, auth, or external service calls.
+This is a static frontend starter with fictional sample data. It includes no backend, auth, credentials, real client data, private files, external service calls, or production screenshots.
+
+## License
+
+MIT — see `LICENSE`.

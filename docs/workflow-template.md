@@ -4,38 +4,42 @@ Use this template to fork the demo into a real internal tool while keeping the p
 
 ## Audience
 
-Freelancers, studios, and service teams that need a lightweight client workspace.
+Freelancers, studios, and service teams that need a lightweight client workspace for approvals, client questions, file requests, decision history, and closeout.
 
 ## Operating Promise
 
-This demo shows how to turn scattered approvals, files, milestone notes, and closeout tasks into a public-safe client command center.
+Client Portal Lite turns scattered milestone notes into a visible client workspace with a status report export at the end of each review cycle.
 
-## Sample Workflow: Client workspace launch loop
+## Sample Workflow
 
-| Stage | Template card | What to customize |
+| Stage | Template area | What to customize |
 | --- | --- | --- |
-| 1 | Kickoff intake and owner map | Replace with your own fictionalized row, owner, due date, and acceptance notes. |
-| 2 | Milestone approval queue | Replace with your own fictionalized row, owner, due date, and acceptance notes. |
-| 3 | Asset request and handoff log | Replace with your own fictionalized row, owner, due date, and acceptance notes. |
-| 4 | Invoice/closeout memo | Replace with your own fictionalized row, owner, due date, and acceptance notes. |
-| 5 | Follow-up offer tracker | Replace with your own fictionalized row, owner, due date, and acceptance notes. |
+| 1 | Kickoff workspace | Replace fictional owner labels, cadence, and acceptance criteria in a private fork. |
+| 2 | Milestone review | Map each client deliverable to an approval state and due window. |
+| 3 | File/request placeholders | Track needed files, access, references, copy, and links without storing private materials. |
+| 4 | Client questions | Capture open, answered, and deferred questions before every update. |
+| 5 | Decision log | Record scope calls, client approvals, and next steps. |
+| 6 | Closeout checklist | Confirm final report, files, decisions, and follow-up prompt before archiving. |
 
 ## Demo Metrics To Adapt
 
-- Open client decisions
-- Assets waiting on buyer
-- Ready-to-send milestones
-- Closeout package coverage
+- Approved milestones
+- Open client questions
+- Pending file/request placeholders
+- Decision log entries
+- Closeout checklist completion
+- Average milestone progress
 
 ## Fork Checklist
 
-- Replace sample items with your real client milestones.
-- Rename owners to match your delivery roles.
-- Use checks as acceptance criteria before a milestone ships.
-- Export the handoff JSON before each client update.
+- Replace fixture data in `src/data/clientWorkspace.ts`.
+- Keep public-safe mode available in private forks.
+- Update report generation tests if export fields change.
+- Refresh `docs/demo-screenshot.png` after UI changes.
+- Run `npm run test:smoke`, `npm run typecheck`, and `npm run build` before publishing.
 
 ## Public-Safe Data Rules
 
-- Use fictional people, accounts, tickets, deals, notes, and companies.
-- Do not add secrets, API keys, private URLs, customer exports, or production screenshots.
-- Keep the app static unless you intentionally add a backend in a private fork.
+- Use fictional people, accounts, tickets, deals, notes, and companies in the public repo.
+- Do not add credentials, private URLs, customer exports, or production screenshots.
+- Keep the app static unless you intentionally add integrations in a private fork.

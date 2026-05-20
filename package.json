@@ -6,6 +6,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
+    "test": "npm run test:smoke",
+    "test:smoke": "rm -rf .tmp-tests && tsc -p tsconfig.test.json && node .tmp-tests/tests/exporters.smoke.test.js",
     "typecheck": "tsc -b --noEmit"
   },
   "dependencies": {
