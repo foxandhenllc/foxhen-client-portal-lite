@@ -191,13 +191,15 @@ h1 {
   margin-bottom: 1.4rem;
   font-size: clamp(3rem, 7vw, 6.8rem);
   line-height: 0.88;
-  letter-spacing: -0.085em;
+  letter-spacing: -0.045em;
+  word-spacing: 0.06em;
 }
 
 h2 {
   font-size: clamp(2rem, 4.5vw, 4.3rem);
   line-height: 0.95;
-  letter-spacing: -0.075em;
+  letter-spacing: -0.04em;
+  word-spacing: 0.04em;
 }
 
 h3 {

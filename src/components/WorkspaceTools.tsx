@@ -33,11 +33,12 @@ export function WorkspaceTools({
   const [draft, setDraft] = useState<MilestoneDraft>(emptyDraft);
 
   async function handleImport(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.currentTarget.files?.[0];
+    const input = event.currentTarget;
+    const file = input.files?.[0];
     if (!file) return;
 
     onImportWorkspace(await file.text());
-    event.currentTarget.value = "";
+    input.value = "";
   }
 
   function updateDraft(field: keyof MilestoneDraft, value: string) {
