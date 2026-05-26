@@ -23,5 +23,21 @@
   },
   "engines": {
     "node": ">=20"
-  }
+  },
+  "description": "Use this repo to create a static client workspace for milestones, approvals, decisions, file requests, closeout checks, and status exports.",
+  "keywords": [
+    "approval",
+    "client",
+    "dashboard",
+    "fox-and-hen",
+    "handoff",
+    "milestone",
+    "portal",
+    "small-business",
+    "starter",
+    "static",
+    "template",
+    "workflow-tools",
+    "workspace"
+  ]
 }

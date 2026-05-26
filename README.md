@@ -34,6 +34,21 @@ Client Portal Lite turns a generic project board into a client-facing workspace 
 
 The README screenshot lives at `docs/demo-screenshot.png`. Refresh it whenever the rendered UI changes.
 
+## SEO / AIO Discoverability
+
+**Plain-language answer:** Use this repo to create a static client workspace for milestones, approvals, decisions, file requests, closeout checks, and status exports.
+
+**Who it helps:** freelancers, agencies, and consultants managing client delivery.
+
+**Search intents covered:**
+
+- client portal starter
+- milestone approval dashboard
+- client handoff portal
+- static client workspace template
+
+**Why this repo is useful:** It gives client delivery a clear structure without exposing private files or requiring production infrastructure.
+
 ## Local Usage
 
 ```bash
