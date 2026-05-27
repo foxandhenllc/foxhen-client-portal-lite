@@ -9,7 +9,7 @@ export const fixtureWorkspace: ClientWorkspace = {
   summary:
     "Fixture workspace for smoke-testing milestone exports, client decisions, file requests, questions, and closeout status.",
   repositoryUrl: "https://github.com/foxandhenllc/foxhen-client-portal-lite",
-  liveDemoUrl: "https://foxhen-client-portal-lite.vercel.app",
+  liveDemoUrl: "https://freetoolsforpeople.com/client-portal-lite",
   theme: {
     accent: "#253f6e",
     accent2: "#f4b860",

@@ -120,7 +120,7 @@ export const sampleWorkspace: ClientWorkspace = {
   summary:
     "A reusable static portal starter for keeping milestones, approvals, decisions, file placeholders, client questions, and closeout tasks in one public-safe workspace.",
   repositoryUrl: "https://github.com/foxandhenllc/foxhen-client-portal-lite",
-  liveDemoUrl: "https://foxhen-client-portal-lite.vercel.app",
+  liveDemoUrl: "https://freetoolsforpeople.com/client-portal-lite",
   theme: {
     accent: "#253f6e",
     accent2: "#f4b860",
