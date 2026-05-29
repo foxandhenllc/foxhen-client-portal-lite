@@ -1,5 +1,7 @@
 # Client Portal Lite
 
+[![Build](https://github.com/foxandhenllc/foxhen-client-portal-lite/actions/workflows/build.yml/badge.svg)](https://github.com/foxandhenllc/foxhen-client-portal-lite/actions/workflows/build.yml)
+
 A reusable, public-safe React + TypeScript + Vite starter for lightweight client workspaces.
 
 ![Client Portal Lite screenshot](docs/demo-screenshot.png)
@@ -65,7 +67,7 @@ A copy-ready CI workflow lives at `docs/github-actions/build.yml.example`; move 
 
 1. Copy this repo into a private fork for real client work.
 2. Edit `src/data/clientWorkspace.ts` to replace fictional milestones, owners, files, requests, questions, decisions, and closeout tasks.
-3. Adjust the theme tokens in the same fixture file.
+3. Adjust the theme values in the same fixture file.
 4. Use `docs/client-brief-template.md` to plan client-specific content before editing code.
 5. Keep backend/auth/integration work out of the public starter unless it belongs in a private fork.
 
@@ -90,9 +92,28 @@ src/exporters    JSON and Markdown report generation
 tests/fixtures   Smoke-test workspace fixture
 ```
 
+## Open Source Readiness
+
+- MIT licensed for reuse, remixing, and client-safe adaptation.
+- GitHub Actions build workflow runs install, typecheck, tests when present, and production build.
+- Contribution guide, roadmap, and issue templates are included for public collaboration.
+- Public-safe data policy keeps examples fictional and reviewable.
+
+## Validation
+
+```bash
+npm run typecheck --if-present
+npm run test --if-present
+npm run build --if-present
+```
+
 ## Public-Safe Scope
 
 This is a static frontend starter with fictional sample data. It includes no backend, auth, credentials, real client data, private files, external service calls, or production screenshots.
+
+## Contributing
+
+See `CONTRIBUTING.md` for public-safe contribution rules, local validation commands, and good first contribution ideas. Roadmap items live in `ROADMAP.md`.
 
 ## License
 

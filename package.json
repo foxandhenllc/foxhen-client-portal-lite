@@ -39,5 +39,6 @@
     "template",
     "workflow-tools",
     "workspace"
-  ]
+  ],
+  "license": "MIT"
 }
